@@ -1,0 +1,61 @@
+nimRumTXConfig:
+  mainVolume: 15 # Volume at startup. 0..100
+  latency_us: 100000 # [us] Delay from TX to RX(client) output
+  logEnable: 0
+
+  clients:
+    - name: prezo2 # Unique name for client (hostname)
+      location: desk # VAlue not currently used
+      volume: 100 # Client-relative volume, multiplied with mainVolume
+      stereoChannel: [0, 1] # Channels sent to client, if 2 channels input
+      multiChannel: [] # Channels sent to client, if >2 channels input
+      offset_us: -100 # [us] Latency offset, relative 'latency'
+
+    - name: prezo10
+      location: front-left
+      volume: 100
+      stereoChannel: [0]
+      multiChannel: [0]
+      offset_us: 0
+
+    - name: prezo11
+      location: front-rigth
+      volume: 100
+      stereoChannel: [1]
+      multiChannel: [1]
+      offset_us: 0
+
+    - name: prezo4
+      location: LFE-left
+      volume: 75
+      stereoChannel: [0]
+      multiChannel: [3]
+      offset_us: 0
+
+    - name: prezo6
+      location: LFE-right
+      volume: 75
+      stereoChannel: [1]
+      multiChannel: [3]
+      offset_us: 0
+
+    - name: prezo7
+      location: center
+      volume: 100
+      stereoChannel: [0, 1]
+      multiChannel: [2]
+      offset_us: -53000
+
+    - name: prezo8
+      location: Rear Left
+      volume: 100
+      stereoChannel: [0]
+      multiChannel: [4]
+      offset_us: -35800
+
+    - name: prezo9
+      location: Rear Right
+      volume: 100
+      stereoChannel: [1]
+      multiChannel: [5]
+      offset_us: -35800

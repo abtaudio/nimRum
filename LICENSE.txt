@@ -1,0 +1,22 @@
+/*-----------------------------------------------------------------------------
+  COPYRIGHT (c) 2022, AbtAudio AB, All rights reserved.
+
+  The copyright to the computer program(s) herein is the property of
+  AbtAudio AB. The computer programs(s) may implement properties protected by
+  patent(s) such as arising from SE544478C2 or WO2021/220149.
+
+  Redistribution in any form, with or without modification, is only permitted
+  with the written permission from AbtAudio AB.
+
+  The computer program(s) may be used for private purposes and for evaluation
+  purposes.
+
+  The computer program(s) may NOT be used for any commercial purposes without
+  the written permission from AbtAudio AB.
+
+  The computer program(s) are provided as is, without any warranties, but
+  feedback in form of suggestions for improvements is encouraged.
+
+  BR,
+  evaluate@abtaudio.tech
+-----------------------------------------------------------------------------*/
