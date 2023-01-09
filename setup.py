@@ -15,6 +15,7 @@ setup(
     name="nimRum",
     description="Nimble Rumble, a library to play wireless(WiFi) sound in perfect synch, for private use and evaluation",
     long_description=getReadme(),
+    long_description_content_type='text/markdown',
     keywords="abtaudio about time audio wireless sound synchronization",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
