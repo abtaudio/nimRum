@@ -1,18 +1,18 @@
 
 # nimRum (Nimble Rumble)
 
-## What is this
+## What this is
 This is an implementation of the **www.abtaudio.tech** solution. **Free for private use and evaluation purposes.**  
 
 This implementation is limited to:  
     * **Raspberry Pi 2,3,4 / Raspbian GNU/Linux 11 (bullseye)**  
-    * Max 8 clients/speakers (Enough for 7.1 or 5.2)  
+    * Max 8 clients/receivers (Enough for 7.1 or 5.2)  
     * Max 2 audio channels per client (1 audio channel per client is the normal case)  
     * No audio repair in case of packet loss  
     * Single local network
 
 
-## What does it
+## What it does
 A program/library to transmit wireless audio over WiFi/Ethernet.
 
 The receiving speakers will play the audio in synch, just as if you connected them with wires, ..without mixing up + and -.
@@ -44,10 +44,16 @@ This maybe sounds obvious, but this is NOT what most wireless speakers does toda
 * Just a kind remark  
     If using line-in on a Bluetooth speaker, be aware that these probably adds something like 20-60ms delay.  
     This is ok for nimRum, you just need to adjust for it.  
-    ...the problem is that I've noticed that this delay is not always constant.  
+    ...the problem is that sometimes this delay is not always constant.  
 
 # Getting started
-## The TX part:
+
+sudo apt-get install libavcodec-dev libavformat-dev libavutil-dev libswscale-dev libasound-dev flac screen libflac-dev  
+
+**Note:** All units should have NTP turned off:  
+**sudo systemctl disable systemd-timesyncd.service**  
+(...and yes, there is a reason why RPi/Linux implementation use CLOCK_REALTIME, even though it is the 'wrong' clock)
+## The TX part (On the RPi being AP):
 1. pip3 install nimRum
 2. runNimRumTx.py *aFileWithSound.wav* (This will play this file repeatedly, forever)
 
@@ -67,8 +73,9 @@ Note: It will use the first 'hw:' sound device it finds. Please disable the othe
 ## Support
 You will need some background knowledge to set this up. I am not saying it is hard, it is actually far from it. But you probably need some previous experience.
 
-Please look in the provided python files, I've tried to make them readable.
-'*which runNimRumTx.py*' will tell you where your installation is located.
+Please look in the provided python files, I've tried to make them readable.  
+*'which runNimRumTx.py'* and *'pip show nimRum'* will tell you where your installation is located.  
+*'ldd libNimRum...so'* will show what librraries dynamically linked.
 
 # Getting further
 ## Streaming from Line-In|S/PDIF input
@@ -80,7 +87,7 @@ It will then look for the first 'hw:' input sound device it finds.
 ## In case you want to install nimRum to a virtuelenv
 pip3 install virtualenv virtualenvwrapper
 
-nano .bashrc
+nano .bashrc  
 #Virtualenvwrapper settings:  
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3  
 export WORKON_HOME=$HOME/.virtualenvs  
@@ -88,22 +95,24 @@ export VIRTUALENVWRAPPER_VIRTUALENV=~/.local/bin/virtualenv
 source ~/.local/bin/virtualenvwrapper.sh  
 export VIRTUALENVWRAPPER_ENV_BIN_DIR=bin  
 
-Login/Logout OR source ~/.bashrc
+Login/Logout OR source ~/.bashrc  
 
-mkvirtualenv testPyNimRum
+mkvirtualenv testPyNimRum  
 
-workon testPyNimRum
+workon testPyNimRum  
 
-deactivate
+deactivate  
 
 # Getting involved
-I myself do not have the possibility to give unlimited support to whatever question. If anyone like this to the level they would like to help others to install, improve the scripts, improve documentation, moderate some chat/forum, or in any other way get involved, then this is in line with what I want.  
+It is not possible to get unlimited support to whatever question from AbtAudio. If anyone like this to the level they would like to help others to install, improve the scripts, improve documentation, moderate some chat/forum, or in any other way get involved, then those questions will be prioritized.
 BR,  
 www.abtaudio.tech
 
 ## TODO
 
-* Find all remaining bugs, specially those from my latest refactoring =)
+* Find all remaining bugs
+
+* Improve installation instruction and PyPi package?
 
 * Replace libNimRumAlsaCapture_py.so  
     This is a library used to capture samples from an audio input and provide raw sample data for transmission. This has nothing to do with what AbtAudio focus on.  
@@ -122,15 +131,11 @@ www.abtaudio.tech
 
 * Support any format for input files. Currently *nimRumTxReadFile_wavio.py* is used, which only supports .wav-format. *nimRumTxReadFile_soundfile.py* needs to be fixed.
 
-* Add possibility to mix audio channels  
-    Like rigth/left front to LFE channels (in case of small front speakers)  
-    Merge left and rigth to a mono channel
-
 * ...
 
 ## Working in development mode for pypi
 git clone https://github.com/abtaudio/nimRum  
-cd evaluate  
+cd nimRum  
 rm -rf dist  
 pip3 install -e .  
 python3 setup.py sdist  

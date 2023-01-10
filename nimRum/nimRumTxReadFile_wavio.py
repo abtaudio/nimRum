@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
-import wavio
+try:
+    import wavio
+except:
+    pass
 
 
 class nimRumTxReadFile:
@@ -8,7 +11,13 @@ class nimRumTxReadFile:
         pass
 
     def open(self, fileName):
-        wav = wavio.read(fileName)
+
+        try:
+            wav = wavio.read(fileName)
+            self.available = True
+        except:
+            self.available = False
+            return None, None
 
         sampleBytes = wav.sampwidth
 
@@ -33,6 +42,9 @@ class nimRumTxReadFile:
         return wav.rate, sampleBytes
 
     def read(self, frames):
+
+        if not self.available:
+            return None, None
 
         bufRemaning = self.bufLen - self.bufPos
         framesToRead = frames

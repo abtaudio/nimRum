@@ -46,6 +46,7 @@ class nimRumTxCfg(nimRumTxRemote.nimRumTxRemote):
         )
 
         self.clientData = self._getTxVal("clients", default=[])
+        self.virtualChannels = self._getTxVal("virtualChannels", default=[])
 
         self.numOfCli = len(self.clientData)
         self.cliIds = list(range(0, self.numOfCli))
@@ -151,7 +152,7 @@ class nimRumTxCfg(nimRumTxRemote.nimRumTxRemote):
 
         print(
             "#### "
-            + self.cliNames(self.cliIdErrorInsertion)
+            + self.cliNames[self.cliIdErrorInsertion]
             + ", error insertion: "
             + str(self.latencyError)
         )

@@ -88,7 +88,7 @@ class nimRumTx(nimRumPyCommon.nimRumPyCommon):
         dataValid = 0
 
         # INIT ARRAY FOR DATA TRANSFER
-        maxChannels = 8
+        maxChannels = 32
         dataOut = []
         while maxChannels > 0:
             dataOut.append(bytearray(4 * 2400))
@@ -98,6 +98,7 @@ class nimRumTx(nimRumPyCommon.nimRumPyCommon):
 
             if fileName == None:
                 # GET DATA - FROM SPDIF
+                # Will fill channel 0..7
                 (
                     res,
                     samplesQueued,
@@ -117,6 +118,18 @@ class nimRumTx(nimRumPyCommon.nimRumPyCommon):
                 self.led.red()
             else:
                 self.led.green()
+
+            # CREATE VIRTUAL CHANNELS, IF ANY
+            for virtCh in self.cfg.virtualChannels:
+                if "crossfaderPosition" in virtCh:
+                    txLib.c_libNimRumChannelMixer(
+                        dataOut,
+                        framesPerInterval,
+                        virtCh["channelNumber"],
+                        virtCh["crossfaderChannelA"],
+                        virtCh["crossfaderChannelB"],
+                        virtCh["crossfaderPosition"],
+                    )
 
             # UPDATE CHANNEL MAPPING IF NEEDED
             if activeChannels != activeChannelsNew:

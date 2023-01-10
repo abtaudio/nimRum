@@ -19,7 +19,7 @@ nimRumTXConfig:
       offset_us: 0
 
     - name: prezo11
-      location: front-rigth
+      location: front-right
       volume: 100
       stereoChannel: [1]
       multiChannel: [1]
@@ -29,22 +29,22 @@ nimRumTXConfig:
       location: LFE-left
       volume: 75
       stereoChannel: [0]
-      multiChannel: [3]
+      multiChannel: [17] # This is a virtual channel
       offset_us: 0
 
     - name: prezo6
       location: LFE-right
       volume: 75
       stereoChannel: [1]
-      multiChannel: [3]
+      multiChannel: [18] # This is a virtual channel
       offset_us: 0
 
     - name: prezo7
       location: center
       volume: 100
-      stereoChannel: [0, 1]
+      stereoChannel: [16] # This is a virtual channel
       multiChannel: [2]
-      offset_us: -53000
+      offset_us: 0
 
     - name: prezo8
       location: Rear Left
@@ -59,3 +59,20 @@ nimRumTXConfig:
       stereoChannel: [1]
       multiChannel: [5]
       offset_us: -35800
+
+  virtualChannels:
+    - channelNumber: 16 # Number for this virtual channel
+      crossfaderChannelA: 0
+      crossfaderChannelB: 1
+      crossfaderPosition: 50 # 0..100
+
+    - channelNumber: 17 # 'Small front' Left
+      crossfaderChannelA: 3
+      crossfaderChannelB: 0
+      crossfaderPosition: 50 # 0..100
+
+    - channelNumber: 18 # 'Small front' Right
+      crossfaderChannelA: 3
+      crossfaderChannelB: 1
+      crossfaderPosition: 50 # 0..100
+
