@@ -1,7 +1,0 @@
-PyYAML
-RPi.GPIO
-gpiozero
-lirc
-netifaces
-wavio
-soundfile
